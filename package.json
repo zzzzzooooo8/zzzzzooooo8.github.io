@@ -9,7 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "next": "16.1.1",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
