@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function SkillButton({
   content,
@@ -53,10 +54,21 @@ function CodePopover({ image_svg }: { image_svg: string }) {
   );
 }
 
+function HeaderButton({ name }: { name: string }) {
+  return (
+    <button className="text-gray-500 font-[550] bg-transparent hover:bg-white/50 transition-all duration-300 px-2 py-1 rounded-full  flex items-center justify-center cursor-pointer">
+      {name}
+    </button>
+  );
+}
+
 export default function Home() {
   return (
     <>
-      <div className="min-h-screen w-fill flex flex-col items-center text-center pt-15 relative">
+      <div
+        id="Home"
+        className="min-h-screen w-fill flex flex-col items-center text-center pt-15 relative"
+      >
         <Image
           src="/first-page.png"
           alt="Background"
@@ -86,7 +98,7 @@ export default function Home() {
         <p className="max-w-2xl text-xl md:text-2xl text-white leading-relaxed mb-10">
           Welcome to my World!
         </p>
-        <div className="flex items-center gap-30 mt-4">
+        <div className="flex justify-evenly sm:justify-center sm:gap-10  w-full">
           {/* QQ Button */}
           <div className="relative group">
             <ContactButton
@@ -116,19 +128,28 @@ export default function Home() {
               viewBox="0 0 24 24"
             />
           </a>
+          {/*Blog Button */}
+          <Link href="/blog">
+            <button className="font-black text-white bg-[#A1F7BF] group relative w-12 h-12 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform cursor-pointer">
+              Blog
+            </button>
+          </Link>
         </div>
       </div>
 
       {/*自我介绍 */}
-      <div className="min-h-screen w-fill flex flex-col items-center text-center pt-15 relative">
+      <div
+        id="About"
+        className=" min-h-screen w-fill flex flex-col items-center text-center pt-15 relative"
+      >
         <Image
-          src="/second-page.jpg"
+          src="/second-page4.jpg"
           alt="Background"
           fill
           className="object-cover -z-10"
           priority
         />
-        <div className="flex flex-col h-[70vh] w-[75vw] rounded-4xl bg-white/40  shadow-xl border border-white/30 items-center">
+        <div className=" flex flex-col h-[70vh] w-[75vw] rounded-4xl bg-white/40  shadow-xl border border-white/30 items-center">
           <h1 className="my-8 text-3xl font-black text-[#A52A2A] tracking-tight">
             About me
           </h1>
@@ -141,7 +162,10 @@ export default function Home() {
       </div>
 
       {/*技能 */}
-      <div className="min-h-screen w-fill flex flex-col items-center text-center pt-10 relative">
+      <div
+        id="Skills"
+        className="min-h-screen w-fill flex flex-col items-center text-center pt-10 relative"
+      >
         <Image
           src="/third-page1.jpg"
           alt="Background"
@@ -161,6 +185,56 @@ export default function Home() {
             <SkillButton content="TailwindCSS" image_url="/tailwind.svg" />
             <SkillButton content="Git" image_url="/git.svg" />
           </div>
+        </div>
+      </div>
+      {/*Works */}
+      <div
+        id="Works"
+        className="min-h-screen w-fill flex flex-col items-center text-center relative"
+      >
+        <Image
+          src="/forth-page.jpg"
+          alt="Background"
+          fill
+          className="object-cover -z-10"
+          priority
+        />
+        <h1 className="my-4 text-3xl md:text-5xl font-black text-[#2A6E3F] tracking-tight">
+          My Works
+        </h1>
+      </div>
+
+      {/*Header */}
+      <div>
+        <div className="flex items-center gap-1 fixed top-0 w-full h-16 bg-gradient-to-b from-white/50 to-transparent">
+          <div className="h-12 mx-2 flex justify-center items-center gap-2 ">
+            <div className="w-12 h-12 rounded-full border-4 border-white shadow-xl overflow-hidden bg-gray-200">
+              <Image
+                src="/TouXiang.jpg"
+                alt="Profile Picture"
+                width={128}
+                height={128}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <h1 className="text-xl  font-black text-white tracking-tight">
+              Zoolin
+            </h1>
+          </div>
+          <header className="fixed right-1/35 flex justify-evenly px-2 py-1 gap-2 rounded-full bg-white/50  shadow-xl border border-white/30 items-center">
+            <a href="#Home">
+              <HeaderButton name="Home" />
+            </a>
+            <a href="#About">
+              <HeaderButton name="About" />
+            </a>
+            <a href="#Skills">
+              <HeaderButton name="Skills" />
+            </a>
+            <a href="#Works">
+              <HeaderButton name="Works" />
+            </a>
+          </header>
         </div>
       </div>
     </>
