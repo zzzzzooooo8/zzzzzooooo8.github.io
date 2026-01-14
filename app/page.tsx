@@ -54,7 +54,7 @@ function CodePopover({ image_svg }: { image_svg: string }) {
   );
 }
 
-function HeaderButton({ name }: { name: string }) {
+export function HeaderButton({ name }: { name: string }) {
   return (
     <button className="text-gray-500 font-[550] bg-transparent hover:bg-white/50 transition-all duration-300 px-2 py-1 rounded-full  flex items-center justify-center cursor-pointer">
       {name}

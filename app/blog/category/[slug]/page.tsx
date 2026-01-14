@@ -1,8 +1,8 @@
-import Image from "next/image";
-import "../globals.css";
-import { getAllPosts } from "./posts";
+import { getAllPosts } from "@/app/blog/posts";
+import { categoryTree, findNameBySlug } from "@/app/blog/categoryData";
 import Link from "next/link";
-import ScrollDownButton from "./ScrollDownButton";
+import Image from "next/image";
+import "@/app/globals.css";
 import {
   AlarmClockCheck,
   PenTool,
@@ -11,75 +11,37 @@ import {
   FolderClosed,
   Tag,
 } from "lucide-react";
-import CategoryTree from "./CategoryTree";
-import { categoryTree } from "./categoryData";
+import CategoryTree from "@/app/blog/CategoryTree";
+import { ContactButton, CountButton } from "@/app/blog/page";
 
-export function ContactButton({
-  image_svg,
-  viewBox,
-  link,
-  textColor,
-  hoverBgColor,
+export default async function Home({
+  params,
 }: {
-  image_svg: string;
-  viewBox: string;
-  link: string;
-  textColor: string;
-  hoverBgColor: string;
+  params: Promise<{ slug: string }>;
 }) {
-  return (
-    <a href={link} target="_blank" className="block ">
-      <button
-        className={`${textColor} ${hoverBgColor} bg-white w-8 h-8 rounded-xl flex items-center justify-center shadow-md transition-all duration-300 cursor-pointer hover:text-white`}
-      >
-        <svg
-          width="22"
-          height="22"
-          viewBox={viewBox}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          stroke="none"
-        >
-          <path d={image_svg} />
-        </svg>
-      </button>
-    </a>
-  );
-}
-
-export function CountButton({ name }: { name: string }) {
-  return (
-    <div className="w-10 h-15 bg-transparent flex flex-col justify-center items-center group">
-      <div className="text-gray-500 group-hover:text-black">shuzi</div>
-      <div className="h-3"></div>
-      <div className="text-gray-500 group-hover:text-black">{name}</div>
-    </div>
-  );
-}
-
-export default function Blog(id = "首页") {
+  const { slug } = await params;
   const posts = getAllPosts();
+  const aimCategory = findNameBySlug(slug, categoryTree);
+  console.log(aimCategory);
+  const aimPosts = posts.filter(
+    (post) => aimCategory && post.frontmatter.category.includes(aimCategory)
+  );
+
   return (
     <>
       {/*背景 */}
       <div className="fixed inset-0 -z-10 w-full h-full">
         <Image
-          src="/BlogBg.jpg"
+          src="/PostBg.jpg"
           alt="Background"
           fill
           className="object-cover -z-10 inset-0"
           priority
         />
       </div>
-      <div className="min-h-screen w-full">
-        {/*封面 */}
-        <div className="text-6xl text-white font-blog flex flex-col items-center justify-center h-[90vh] w-full  bg-black/30  shadow-xl border border-white/30 items-center">
-          Zoolin&apos;s Blog
-        </div>
-        <ScrollDownButton />
-      </div>
+
       {/*内容 */}
-      <div className="flex mt-18">
+      <div className="flex mt-20">
         <div className=" bg-transparent min-h-screen flex-col gap-15 ml-6 hidden md:flex">
           <div className="bg-white/80 w-60 h-75 rounded-md flex flex-col items-center">
             <div className="mt-8 w-22 h-22 rounded-full shadow-xl overflow-hidden bg-gray-200">
@@ -137,47 +99,51 @@ export default function Blog(id = "首页") {
         </div>
         {/*文章 */}
         <div className="flex flex-col">
-          {posts.map((post) => {
+          {aimPosts.map((aimPost) => {
             return (
               <div
-                key={post.slug}
+                key={aimPost.slug}
                 className="bg-white/90 mx-10 rounded-lg mb-5 p-5 flex flex-col gap-3"
               >
                 <div>
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`/blog/${aimPost.slug}`}
                     className="text-3xl font-black text-[#468C37] hover:scale-102"
                   >
-                    {post.frontmatter.title}
+                    {aimPost.frontmatter.title}
                   </Link>
                   <div className="flex gap-5 my-1">
                     <div className="flex items-center gap-1">
                       <CalendarDays className="w-5 h-5" />
                       <p className="w-fit font-semibold">
-                        {post.frontmatter.date}
+                        {aimPost.frontmatter.date}
                       </p>
                     </div>
                     <div className="flex items-center gap-1">
                       <LibraryBig className="w-5 h-5" />
                       <p className="font-semibold">
-                        {post.frontmatter.category}
+                        {aimPost.frontmatter.category}
                       </p>
                     </div>
                     <div className="flex items-center gap-1">
                       <Tag className="w-5 h-5" />
-                      <p className="font-semibold">{post.frontmatter.tags}</p>
+                      <p className="font-semibold">
+                        {aimPost.frontmatter.tags}
+                      </p>
                     </div>
                   </div>
                 </div>
-                <p className="line-clamp-2">{post.frontmatter.description}</p>
+                <p className="line-clamp-2">
+                  {aimPost.frontmatter.description}
+                </p>
                 <div className="flex gap-3 text-gray-500 text-sm">
                   <div className="flex ">
                     <PenTool className="w-4 h-4" />
-                    <p>{post.words}字</p>
+                    <p>{aimPost.words}字</p>
                   </div>
                   <div className="flex">
                     <AlarmClockCheck className="w-4 h-4" />
-                    <p>{post.reading}分钟</p>
+                    <p>{aimPost.reading}分钟</p>
                   </div>
                 </div>
               </div>

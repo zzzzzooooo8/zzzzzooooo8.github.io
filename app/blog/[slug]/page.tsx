@@ -20,7 +20,7 @@ export default async function Home({
           priority
         />
       </div>
-      <div className="bg-white/70 max-w-4xl mx-auto">
+      <div className="bg-white/70 max-w-4xl mx-auto mt-14">
         <div className="max-w-4xl mx-auto p-6">
           <h1 className="text-4xl font-bold">{frontmatter.title}</h1>
           <p className="text-gray-500">{frontmatter.date}</p>
