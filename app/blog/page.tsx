@@ -8,7 +8,11 @@ import {
   PenTool,
   LibraryBig,
   CalendarDays,
+  FolderClosed,
+  Tag,
 } from "lucide-react";
+import CategoryTree from "./category";
+import { categoryTree } from "./category";
 
 function ContactButton({
   image_svg,
@@ -60,7 +64,7 @@ export default function Blog() {
       {/*背景 */}
       <div className="fixed inset-0 -z-10 w-full h-full">
         <Image
-          src="/blog-bg.jpg"
+          src="/BlogBg.jpg"
           alt="Background"
           fill
           className="object-cover -z-10 inset-0"
@@ -75,8 +79,8 @@ export default function Blog() {
         <ScrollDownButton />
       </div>
       {/*内容 */}
-      <div className="flex mt-5 gap-20">
-        <div className=" bg-transparent min-h-screen flex flex-col gap-15 ml-6">
+      <div className="flex mt-5">
+        <div className=" bg-transparent min-h-screen flex-col gap-15 ml-6 hidden md:flex">
           <div className="bg-white/80 w-60 h-75 rounded-md flex flex-col items-center">
             <div className="mt-8 w-22 h-22 rounded-full shadow-xl overflow-hidden bg-gray-200">
               {/* 头像 */}
@@ -91,7 +95,7 @@ export default function Blog() {
             <h1 className="text-4xl font-black text-[#A1F7BF] tracking-tight">
               Zoolin
             </h1>
-            <div className="flex justify-evenly sm:justify-center sm:gap-8  w-full ">
+            <div className="flex justify-evenly sm:justify-center sm:gap-8  w-full my-1">
               <ContactButton
                 image_svg="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
                 viewBox="0 0 24 24"
@@ -121,31 +125,47 @@ export default function Blog() {
             </div>
           </div>
           {/*目录 */}
-          <div className="bg-white/80 w-60 h-80 rounded-md flex flex-col items-center left-3"></div>
+          <div className="bg-white/80 w-60 rounded-md left-3">
+            <div className="flex items-center gap-1 my-3 mx-3">
+              <FolderClosed />
+              <div className="text-xl text-gray-700 font-bold">分 类</div>
+            </div>
+            <div className="mx-8">
+              <CategoryTree categories={categoryTree} />
+            </div>
+          </div>
         </div>
         <div className="flex flex-col">
           {posts.map((post) => {
             return (
               <div
                 key={post.slug}
-                className="bg-white/95 w-200 h-41 rounded-lg mb-5 p-5 flex flex-col gap-3"
+                className="bg-white/90 mx-10 rounded-lg mb-5 p-5 flex flex-col gap-3"
               >
-                <div className="flex justify-between">
+                <div>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="text-2xl font-black text-[#468C37] hover:scale-102"
+                    className="text-3xl font-black text-[#468C37] hover:scale-102"
                   >
                     {post.frontmatter.title}
                   </Link>
-                  <div className="flex items-center">
-                    <LibraryBig className="w-5 h-5" />
-                    <p className="font-semibold">{post.frontmatter.category}</p>
-                  </div>
-                  <div className="flex items-center">
-                    <CalendarDays className="w-5 h-5" />
-                    <p className="w-fit font-semibold">
-                      {post.frontmatter.date}
-                    </p>
+                  <div className="flex gap-5 my-1">
+                    <div className="flex items-center gap-1">
+                      <CalendarDays className="w-5 h-5" />
+                      <p className="w-fit font-semibold">
+                        {post.frontmatter.date}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <LibraryBig className="w-5 h-5" />
+                      <p className="font-semibold">
+                        {post.frontmatter.category}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Tag className="w-5 h-5" />
+                      <p className="font-semibold">{post.frontmatter.tags}</p>
+                    </div>
                   </div>
                 </div>
                 <p className="line-clamp-2">{post.frontmatter.description}</p>

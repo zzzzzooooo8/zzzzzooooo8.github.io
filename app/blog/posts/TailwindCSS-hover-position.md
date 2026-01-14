@@ -2,7 +2,7 @@
 date: 2026-01-04
 tags:
   - CSS
-category: 前端
+category: 前端/TailwindCss
 title: TailwindCSS 如何实现悬浮时弹出图片
 description: 本文详细拆解了如何利用 Tailwind CSS 实现“鼠标悬浮按钮时弹出二维码”的交互功能，非常适合个人博客的社交联系场景。文章首先通过实战代码演示了 ContactButton 与 CodePopover 组件的构建，核心逻辑在于利用 group 标记父容器，配合 group-hover:block 实现子组件的动态显示。随后，作者深入分析了“子绝父相”的定位原理，即通过父级的 relative 锁定坐标系，让 absolute 定位的图片能精准悬浮在按钮上方。此外，文中还系统性地梳理了 static、relative、absolute、fixed 和 sticky 这五种定位属性的差异与应用场景，帮助读者从底层逻辑上掌握 Tailwind CSS 的布局机制。
 ---
