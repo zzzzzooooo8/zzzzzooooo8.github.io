@@ -3,15 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { CategoryNode } from "./categoryData";
-import { getAllPosts } from "@/app/blog/posts";
 
 // --- 子组件：负责单个节点的渲染、状态管理和递归 ---
 const CategoryItem = ({
   category,
   level,
+  categoryCount,
 }: {
   category: CategoryNode;
   level: number;
+  categoryCount: Map<string, number>;
 }) => {
   // 核心：每个 Item 独立管理自己的展开状态
   const [isOpen, setIsOpen] = useState(false);
@@ -54,13 +55,18 @@ const CategoryItem = ({
             className="text-gray-700 text-l scale-110 hover:text-[#468C37] hover:font-bold transition-colors block flex-1"
           >
             {category.name}
+            <span>({categoryCount.get(category.name) || 0})</span>
           </Link>
         </div>
       </div>
 
       {/* 3. 子级递归：只有在 isOpen 为 true 时才渲染 */}
       {hasChildren && isOpen && (
-        <CategoryTree categories={category.children!} level={level + 1} />
+        <CategoryTree
+          categories={category.children!}
+          level={level + 1}
+          categoryCount={categoryCount}
+        />
       )}
     </li>
   );
@@ -70,9 +76,11 @@ const CategoryItem = ({
 export default function CategoryTree({
   categories,
   level = 0,
+  categoryCount,
 }: {
   categories: CategoryNode[];
   level?: number;
+  categoryCount: Map<string, number>;
 }) {
   if (!categories) return null;
   return (
@@ -84,7 +92,11 @@ export default function CategoryTree({
     >
       {categories.map((ca) => (
         <div key={ca.slug}>
-          <CategoryItem category={ca} level={level} />
+          <CategoryItem
+            category={ca}
+            level={level}
+            categoryCount={categoryCount}
+          />
         </div>
       ))}
     </ul>

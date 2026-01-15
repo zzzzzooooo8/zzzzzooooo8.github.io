@@ -1,6 +1,6 @@
 import Image from "next/image";
 import "../globals.css";
-import { getAllPosts } from "./posts";
+import { countCategory, getAllPosts } from "./posts";
 import Link from "next/link";
 import ScrollDownButton from "@/app/blog/components/ScrollDownButton";
 import {
@@ -131,7 +131,10 @@ export default function Blog() {
               <div className="text-xl text-gray-700 font-bold">分 类</div>
             </div>
             <div className="mx-8">
-              <CategoryTree categories={categoryTree} />
+              <CategoryTree
+                categories={categoryTree}
+                categoryCount={countCategory()}
+              />
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { HeaderButton } from "@/app/page";
 import Sidebar from "@/app/blog/components/Sidebar";
 import Footer from "@/app/blog/components/Footer";
 import Link from "next/link";
+import { countCategory } from "./posts";
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
       <div className="min-h-screen flex flex-col">
         {/*Header */}
         <div className="flex items-center gap-1 fixed z-10 top-0 w-full h-16 bg-gradient-to-b from-gray-300 to-transparent">
-          <Sidebar />
+          <Sidebar categoryCount={countCategory()} />
           <div className="h-12 mx-2 flex justify-center items-center gap-2 ">
             <div className="w-12 h-12 rounded-full border-4 border-white shadow-xl overflow-hidden bg-gray-200">
               <Image

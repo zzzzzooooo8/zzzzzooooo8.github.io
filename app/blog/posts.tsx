@@ -88,8 +88,9 @@ export function getAllPosts(): Post[] {
   return posts;
 }
 
-export function countCategory(posts: Post[]) {
+export function countCategory() {
   const mapp = new Map();
+  const posts = getAllPosts();
   posts.forEach((post) => {
     const ca = post.frontmatter.category.split("/");
     ca.map((a) => {

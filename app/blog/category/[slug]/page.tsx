@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/app/blog/posts";
+import { getAllPosts, countCategory } from "@/app/blog/posts";
 import { categoryTree, findNameBySlug } from "@/app/blog/categoryData";
 import Link from "next/link";
 import Image from "next/image";
@@ -93,7 +93,10 @@ export default async function Home({
               <div className="text-xl text-gray-700 font-bold">分 类</div>
             </div>
             <div className="mx-8">
-              <CategoryTree categories={categoryTree} />
+              <CategoryTree
+                categories={categoryTree}
+                categoryCount={countCategory()}
+              />
             </div>
           </div>
         </div>

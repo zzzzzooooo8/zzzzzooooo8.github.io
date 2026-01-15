@@ -5,7 +5,11 @@ import { Menu, FolderClosed } from "lucide-react";
 import CategoryTree from "@/app/blog/CategoryTree";
 import { categoryTree } from "@/app/blog/categoryData";
 
-const SidebarContent = () => {
+const SidebarContent = ({
+  categoryCount,
+}: {
+  categoryCount: Map<string, number>;
+}) => {
   return (
     <>
       <div className=" bg-transparent min-h-screen flex-col gap-15 mt-13">
@@ -16,7 +20,10 @@ const SidebarContent = () => {
             <div className="text-xl text-gray-700 font-bold">分 类</div>
           </div>
           <div className="mx-8">
-            <CategoryTree categories={categoryTree} />
+            <CategoryTree
+              categories={categoryTree}
+              categoryCount={categoryCount}
+            />
           </div>
         </div>
       </div>
@@ -24,7 +31,11 @@ const SidebarContent = () => {
   );
 };
 
-export default function Sidebar() {
+export default function Sidebar({
+  categoryCount,
+}: {
+  categoryCount: Map<string, number>;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -44,7 +55,7 @@ export default function Sidebar() {
           />
           {/* 侧边栏 */}
           <div className="absolute top-0 h-full w-1/3 max-w-xs bg-white shadow-2xl p-6 flex flex-col animate-in slide-in-from-right duration-300">
-            <SidebarContent />
+            <SidebarContent categoryCount={categoryCount} />
           </div>
         </div>
       )}
