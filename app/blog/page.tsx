@@ -2,7 +2,7 @@ import Image from "next/image";
 import "../globals.css";
 import { getAllPosts } from "./posts";
 import Link from "next/link";
-import ScrollDownButton from "./ScrollDownButton";
+import ScrollDownButton from "@/app/blog/components/ScrollDownButton";
 import {
   AlarmClockCheck,
   PenTool,
@@ -57,7 +57,7 @@ export function CountButton({ name }: { name: string }) {
   );
 }
 
-export default function Blog(id = "首页") {
+export default function Blog() {
   const posts = getAllPosts();
   return (
     <>
@@ -79,7 +79,7 @@ export default function Blog(id = "首页") {
         <ScrollDownButton />
       </div>
       {/*内容 */}
-      <div className="flex mt-18">
+      <div className="flex mt-18" id="首页">
         <div className=" bg-transparent min-h-screen flex-col gap-15 ml-6 hidden md:flex">
           <div className="bg-white/80 w-60 h-75 rounded-md flex flex-col items-center">
             <div className="mt-8 w-22 h-22 rounded-full shadow-xl overflow-hidden bg-gray-200">
@@ -173,11 +173,11 @@ export default function Blog(id = "首页") {
                 <div className="flex gap-3 text-gray-500 text-sm">
                   <div className="flex ">
                     <PenTool className="w-4 h-4" />
-                    <p>{post.words}字</p>
+                    <p>{post.frontmatter.words}字</p>
                   </div>
                   <div className="flex">
                     <AlarmClockCheck className="w-4 h-4" />
-                    <p>{post.reading}分钟</p>
+                    <p>{post.frontmatter.reading}分钟</p>
                   </div>
                 </div>
               </div>

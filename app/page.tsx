@@ -24,7 +24,7 @@ function ContactButton({
   viewBox: string;
 }) {
   return (
-    <button className="bg-white group relative w-12 h-12 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform cursor-pointer">
+    <button className="bg-white group relative w-12 h-12 rounded-full flex items-center justify-center shadow-3xl hover:scale-110 transition-transform cursor-pointer">
       <svg
         width="30"
         height="30"

@@ -139,11 +139,11 @@ export default async function Home({
                 <div className="flex gap-3 text-gray-500 text-sm">
                   <div className="flex ">
                     <PenTool className="w-4 h-4" />
-                    <p>{aimPost.words}字</p>
+                    <p>{aimPost.frontmatter.words}字</p>
                   </div>
                   <div className="flex">
                     <AlarmClockCheck className="w-4 h-4" />
-                    <p>{aimPost.reading}分钟</p>
+                    <p>{aimPost.frontmatter.reading}分钟</p>
                   </div>
                 </div>
               </div>

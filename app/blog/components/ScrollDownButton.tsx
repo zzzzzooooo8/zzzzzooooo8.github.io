@@ -12,7 +12,7 @@ export default function ScrollDownButton() {
       className="absolute bottom-15 left-1/2 -translate-x-1/2 
                         animate-bounce 
                         text-gray-200 hover:text-gray-500 
-                        focus:outline-none focus:ring-2 focus:ring-blue-500
+                        
                         z-10 cursor-pointer"
     >
       <ChevronDownIcon className="w-8 h-8" /> {/* 32px */}

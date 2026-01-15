@@ -9,14 +9,14 @@ export interface PostFrontmatter {
   tags: string;
   category: string;
   description: string;
+  words: number;
+  reading: number;
 }
 
 export interface Post {
   slug: string;
   frontmatter: PostFrontmatter;
   content: string;
-  words: number;
-  reading: number;
 }
 
 const postsDirectory = path.join(process.cwd(), "app/blog/posts");
@@ -43,10 +43,10 @@ export function getPostBySlug(slug: string): Post {
       description: data.description,
       category: data.category,
       tags: data.tags,
+      words: stats.words,
+      reading: stats.minutes,
     } as PostFrontmatter,
     content,
-    words: stats.words,
-    reading: stats.minutes,
   };
 }
 
@@ -79,11 +79,22 @@ export function getAllPosts(): Post[] {
         description: data.description,
         category: data.category,
         tags: data.tags,
+        words: stats.words,
+        reading: stats.minutes,
       } as PostFrontmatter,
       content,
-      words: stats.words,
-      reading: stats.minutes,
     };
   });
   return posts;
+}
+
+export function countCategory(posts: Post[]) {
+  const mapp = new Map();
+  posts.forEach((post) => {
+    const ca = post.frontmatter.category.split("/");
+    ca.map((a) => {
+      mapp.set(a, (mapp.get(a) || 0) + 1);
+    });
+  });
+  return mapp;
 }
