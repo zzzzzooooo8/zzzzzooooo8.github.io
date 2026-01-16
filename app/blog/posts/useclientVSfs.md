@@ -1,8 +1,7 @@
 ---
 date: 2026-01-12
 title: 解决冤家路窄——“use client”与“fs”
-tags:
-  - CSS
+tags: CSS
 category: 前端/React
 description: 弄不清 "use client" 和 fs 的运行边界？这篇复盘笔记教你如何通过组件拆分和规范目录命名，优雅地解决 Next.js 客户端无法读取文件系统的问题。
 ---

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import "../globals.css";
-import { countCategory, getAllPosts } from "./posts";
+import { countCategory, getAllPosts, countTag } from "./posts";
 import Link from "next/link";
 import ScrollDownButton from "@/app/blog/components/ScrollDownButton";
 import {
@@ -13,52 +13,23 @@ import {
 } from "lucide-react";
 import CategoryTree from "./CategoryTree";
 import { categoryTree } from "./categoryData";
-
-export function ContactButton({
-  image_svg,
-  viewBox,
-  link,
-  textColor,
-  hoverBgColor,
-}: {
-  image_svg: string;
-  viewBox: string;
-  link: string;
-  textColor: string;
-  hoverBgColor: string;
-}) {
-  return (
-    <a href={link} target="_blank" className="block ">
-      <button
-        className={`${textColor} ${hoverBgColor} bg-white w-8 h-8 rounded-xl flex items-center justify-center shadow-md transition-all duration-300 cursor-pointer hover:text-white`}
-      >
-        <svg
-          width="22"
-          height="22"
-          viewBox={viewBox}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          stroke="none"
-        >
-          <path d={image_svg} />
-        </svg>
-      </button>
-    </a>
-  );
-}
-
-export function CountButton({ name }: { name: string }) {
-  return (
-    <div className="w-10 h-15 bg-transparent flex flex-col justify-center items-center group">
-      <div className="text-gray-500 group-hover:text-black">shuzi</div>
-      <div className="h-3"></div>
-      <div className="text-gray-500 group-hover:text-black">{name}</div>
-    </div>
-  );
-}
+import { ContactButton } from "@/app/blog/components/ContactButton";
+import { CountButton } from "@/app/blog/components/CountButton";
 
 export default function Blog() {
   const posts = getAllPosts();
+  const postMap = countCategory();
+  const postMap1 = countTag();
+  let postNum = 0;
+  let CaNum = 0;
+  let tagNum = 0;
+  for (const n of postMap.values()) {
+    postNum += n;
+    CaNum += 1;
+  }
+  for (const n of postMap1.values()) {
+    tagNum += 1;
+  }
   return (
     <>
       {/*背景 */}
@@ -119,9 +90,9 @@ export default function Blog() {
               />
             </div>
             <div className="flex justify-center items-center bg-transparent w-50 h-20 gap-6">
-              <CountButton name="文章" />
-              <CountButton name="类型" />
-              <CountButton name="标签" />
+              <CountButton name="文章" count={postNum} />
+              <CountButton name="分类" count={18} />
+              <CountButton name="标签" count={tagNum} />
             </div>
           </div>
           {/*目录 */}
@@ -130,7 +101,7 @@ export default function Blog() {
               <FolderClosed />
               <div className="text-xl text-gray-700 font-bold">分 类</div>
             </div>
-            <div className="mx-8">
+            <div className="mx-8 my-2">
               <CategoryTree
                 categories={categoryTree}
                 categoryCount={countCategory()}

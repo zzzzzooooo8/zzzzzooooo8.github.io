@@ -99,3 +99,15 @@ export function countCategory() {
   });
   return mapp;
 }
+
+export function countTag() {
+  const mapp = new Map();
+  const posts = getAllPosts();
+  posts.forEach((post) => {
+    const ca = post.frontmatter.tags.split("/");
+    ca.map((a) => {
+      mapp.set(a, (mapp.get(a) || 0) + 1);
+    });
+  });
+  return mapp;
+}

@@ -1,4 +1,4 @@
-import { getAllPosts, countCategory } from "@/app/blog/posts";
+import { getAllPosts, countCategory, countTag } from "@/app/blog/posts";
 import { categoryTree, findNameBySlug } from "@/app/blog/categoryData";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,8 @@ import {
   Tag,
 } from "lucide-react";
 import CategoryTree from "@/app/blog/CategoryTree";
-import { ContactButton, CountButton } from "@/app/blog/page";
+import { ContactButton } from "@/app/blog/components/ContactButton";
+import { CountButton } from "@/app/blog/components/CountButton";
 
 export default async function Home({
   params,
@@ -26,6 +27,18 @@ export default async function Home({
   const aimPosts = posts.filter(
     (post) => aimCategory && post.frontmatter.category.includes(aimCategory)
   );
+  const postMap = countCategory();
+  const postMap1 = countTag();
+  let postNum = 0;
+  let CaNum = 0;
+  let tagNum = 0;
+  for (const n of postMap.values()) {
+    postNum += n;
+    CaNum += 1;
+  }
+  for (const n of postMap1.values()) {
+    tagNum += 1;
+  }
 
   return (
     <>
@@ -81,9 +94,9 @@ export default async function Home({
               />
             </div>
             <div className="flex justify-center items-center bg-transparent w-50 h-20 gap-6">
-              <CountButton name="文章" />
-              <CountButton name="类型" />
-              <CountButton name="标签" />
+              <CountButton name="文章" count={postNum} />
+              <CountButton name="分类" count={18} />
+              <CountButton name="标签" count={tagNum} />
             </div>
           </div>
           {/*目录 */}
