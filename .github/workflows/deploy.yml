@@ -4,7 +4,7 @@ name: Deploy Next.js to GitHub Pages
 on:
   # 当推送到 main 分支时触发 (如果你是 master 分支，请修改这里)
   push:
-    branches: ["master"]
+    branches: ["main"]
   # 允许在 GitHub Actions 页面手动触发
   workflow_dispatch:
 
