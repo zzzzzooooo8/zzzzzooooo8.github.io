@@ -57,3 +57,14 @@ export function findNameBySlug(slug: string, categories: CategoryNode[]) {
         if (ca.children.length) return findNameBySlug(slug, ca.children);
     }
 }
+
+export function getAllCategorySlugs(categories: CategoryNode[] = categoryTree): string[] {
+    const slugs: string[] = [];
+    for (const category of categories) {
+        slugs.push(category.slug);
+        if (category.children.length > 0) {
+            slugs.push(...getAllCategorySlugs(category.children));
+        }
+    }
+    return slugs;
+}

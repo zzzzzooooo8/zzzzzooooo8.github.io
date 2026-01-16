@@ -1,5 +1,5 @@
 import { getAllPosts, countCategory, countTag } from "@/app/blog/posts";
-import { categoryTree, findNameBySlug } from "@/app/blog/categoryData";
+import { categoryTree, findNameBySlug, getAllCategorySlugs } from "@/app/blog/categoryData";
 import Link from "next/link";
 import Image from "next/image";
 import "@/app/globals.css";
@@ -14,6 +14,13 @@ import {
 import CategoryTree from "@/app/blog/CategoryTree";
 import { ContactButton } from "@/app/blog/components/ContactButton";
 import { CountButton } from "@/app/blog/components/CountButton";
+
+export async function generateStaticParams() {
+  const slugs = getAllCategorySlugs();
+  return slugs.map((slug) => ({
+    slug,
+  }));
+}
 
 export default async function Home({
   params,

@@ -1,8 +1,15 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getPostBySlug } from "@/app/blog/posts";
+import { getPostBySlug, getPostSlugs } from "@/app/blog/posts";
 import Image from "next/image";
 import { CalendarDays, Tag, Clock, PenTool } from "lucide-react";
 import rehypePrettyCode from "rehype-pretty-code";
+
+export async function generateStaticParams() {
+  const slugs = getPostSlugs();
+  return slugs.map((slug) => ({
+    slug: slug.replace(/\.md?$/, ""),
+  }));
+}
 
 export default async function Home({
   params,
