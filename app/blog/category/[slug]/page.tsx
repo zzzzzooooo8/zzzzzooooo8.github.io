@@ -1,5 +1,9 @@
 import { getAllPosts, countCategory, countTag } from "@/app/blog/posts";
-import { categoryTree, findNameBySlug, getAllCategorySlugs } from "@/app/blog/categoryData";
+import {
+  categoryTree,
+  findNameBySlug,
+  getAllCategorySlugs,
+} from "@/app/blog/categoryData";
 import Link from "next/link";
 import Image from "next/image";
 import "@/app/globals.css";
