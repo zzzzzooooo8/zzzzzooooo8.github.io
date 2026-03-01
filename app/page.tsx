@@ -56,9 +56,9 @@ function CodePopover({ image_svg }: { image_svg: string }) {
 
 export function HeaderButton({ name }: { name: string }) {
   return (
-    <button className="text-gray-500 font-[550] bg-transparent hover:bg-white/50 transition-all duration-300 px-2 py-1 rounded-full  flex items-center justify-center cursor-pointer">
+    <div className="text-gray-500 font-[550] bg-transparent hover:bg-white/50 transition-all duration-300 px-2 py-1 rounded-full  flex items-center justify-center cursor-pointer">
       {name}
-    </button>
+    </div>
   );
 }
 
@@ -204,34 +204,35 @@ export default function Home() {
         </h1>
       </div>
 
-      {/*Header */}
-      <div>
-        <div className="flex items-center gap-1 fixed top-0 w-full h-16 bg-gradient-to-b from-white/50 to-transparent">
-          <div className="h-12 mx-2 flex justify-center items-center gap-2 ">
-            <div className="w-12 h-12 rounded-full border-4 border-white shadow-xl overflow-hidden bg-gray-200">
+      {/* Header */}
+      <div className="fixed top-0 left-0 w-full h-16 bg-gradient-to-b from-white/50 to-transparent z-50">
+        <div className="flex justify-between items-center w-full h-full px-4 md:px-8">
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shadow-md overflow-hidden bg-gray-200">
               <Image
                 src="/TouXiang.jpg"
                 alt="Profile Picture"
-                width={128}
-                height={128}
+                width={48}
+                height={48}
                 className="object-cover w-full h-full"
               />
             </div>
-            <h1 className="text-xl  font-black text-white tracking-tight">
+            <h1 className="block max-[470px]:hidden text-xl font-black text-white tracking-tight">
               Zoolin
             </h1>
           </div>
-          <header className="fixed right-1/35 flex justify-evenly px-2 py-1 gap-2 rounded-full bg-white/50  shadow-xl border border-white/30 items-center">
-            <a href="#Home">
+
+          <header className="flex justify-evenly items-center px-3 py-1.5 gap-2 rounded-full bg-white/50 backdrop-blur-md shadow-xl border border-white/30">
+            <a href="#Home" className="hover:scale-105 transition-transform">
               <HeaderButton name="Home" />
             </a>
-            <a href="#About">
+            <a href="#About" className="hover:scale-105 transition-transform">
               <HeaderButton name="About" />
             </a>
-            <a href="#Skills">
+            <a href="#Skills" className="hover:scale-105 transition-transform">
               <HeaderButton name="Skills" />
             </a>
-            <a href="#Works">
+            <a href="#Works" className="hover:scale-105 transition-transform">
               <HeaderButton name="Works" />
             </a>
           </header>

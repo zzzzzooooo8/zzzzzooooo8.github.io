@@ -110,47 +110,50 @@ export default function Blog() {
           </div>
         </div>
         {/*文章 */}
-        <div className="flex flex-col">
+        {/* 修改点 1：加上 flex-1 和 w-full，让文章列表在手机端撑满全宽，在电脑端占满侧边栏右侧剩余空间 */}
+        <div className="flex flex-col flex-1 w-full">
           {posts.map((post) => {
             return (
               <div
                 key={post.slug}
-                className="bg-white/90 mx-10 rounded-lg mb-5 p-5 flex flex-col gap-3"
+                
+                className="bg-white/90 mx-4 md:mx-10 rounded-lg mb-5 p-4 sm:p-6 flex flex-col gap-3 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="text-3xl font-black text-[#468C37] hover:scale-102"
+                    className="text-2xl sm:text-3xl font-black text-[#468C37] hover:scale-[1.02] inline-block transition-transform origin-left"
                   >
                     {post.frontmatter.title}
                   </Link>
-                  <div className="flex gap-5 my-1">
-                    <div className="flex items-center gap-1">
-                      <CalendarDays className="w-5 h-5" />
-                      <p className="w-fit font-semibold">
-                        {post.frontmatter.date}
-                      </p>
+                  {/* 小修改：让日期、分类、标签在手机端可以自动换行 (flex-wrap)，防止长标签把盒子撑破 */}
+                  <div className="flex flex-wrap gap-3 sm:gap-5 my-2 text-sm sm:text-base">
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <p className="font-semibold">{post.frontmatter.date}</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <LibraryBig className="w-5 h-5" />
-                      <p className="font-semibold">
-                        {post.frontmatter.category}
-                      </p>
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <LibraryBig className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <p className="font-semibold">{post.frontmatter.category}</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Tag className="w-5 h-5" />
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <Tag className="w-4 h-4 sm:w-5 sm:h-5" />
                       <p className="font-semibold">{post.frontmatter.tags}</p>
                     </div>
                   </div>
                 </div>
-                <p className="line-clamp-2">{post.frontmatter.description}</p>
-                <div className="flex gap-3 text-gray-500 text-sm">
-                  <div className="flex ">
-                    <PenTool className="w-4 h-4" />
+                
+                <p className="line-clamp-2 text-gray-700 leading-relaxed text-sm sm:text-base">
+                  {post.frontmatter.description}
+                </p>
+                
+                <div className="flex gap-4 text-gray-400 text-xs sm:text-sm mt-1">
+                  <div className="flex items-center gap-1.5">
+                    <PenTool className="w-3.5 h-3.5" />
                     <p>{post.frontmatter.words}字</p>
                   </div>
-                  <div className="flex">
-                    <AlarmClockCheck className="w-4 h-4" />
+                  <div className="flex items-center gap-1.5">
+                    <AlarmClockCheck className="w-3.5 h-3.5" />
                     <p>{post.frontmatter.reading}分钟</p>
                   </div>
                 </div>

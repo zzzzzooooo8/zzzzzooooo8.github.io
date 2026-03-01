@@ -27,7 +27,6 @@ const CategoryItem = ({
     <li>
       <div className="flex items-center justify-between group py-1">
         <div className="flex items-center w-full gap-1">
-          {/* 1. 箭头按钮 */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`
@@ -53,7 +52,6 @@ const CategoryItem = ({
             </svg>
           </button>
 
-          {/* 2. 链接与名称 */}
           <Link
             href={`/blog/category/${category.slug}`}
             className="text-gray-700 text-l scale-110 hover:text-[#468C37] hover:font-bold transition-colors block flex-1"
@@ -61,18 +59,16 @@ const CategoryItem = ({
             {category.name}
           </Link>
 
-          {/* 3. 数量显示 (这里使用传进来的 counts) */}
           <span className="text-xs text-gray-400 ml-2">
             {counts[category.name] || 0}
           </span>
         </div>
       </div>
 
-      {/* 4. 子级递归：递归调用 CategoryTreeClient 自身 */}
       {hasChildren && isOpen && (
         <CategoryTreeClient
           categories={category.children!}
-          counts={counts} // 把计数表继续传下去
+          counts={counts} 
           level={level + 1}
         />
       )}
@@ -80,7 +76,6 @@ const CategoryItem = ({
   );
 };
 
-// --- 客户端组件主入口 ---
 export default function CategoryTreeClient({
   categories,
   counts,

@@ -33,37 +33,42 @@ export default async function Home({
         />
       </div>
       <div className="max-w-4xl mx-auto px-4 mt-8 sm:px-6 mb-20">
-        {/* 2. 主卡片容器：增加毛玻璃、边框、阴影 */}
         <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/40 overflow-hidden">
-          {/* 3. 文章头部 Header */}
+          {/*文章头部 Header */}
           <div className="p-8 md:p-12 border-b border-gray-100">
-            {/* 标题：加大字号，收紧字间距 */}
+            {/* 标题 */}
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-6 text-center md:text-left">
               {frontmatter.title}
             </h1>
 
-            {/* 元信息栏*/}
-            <div className="flex items-center gap-6 text-gray-500 text-sm md:text-base">
+           {/* 元信息栏 */}
+            {/* 修改点 1：加上 flex-wrap 允许换行，修改点 2：手机端 gap-3，电脑端 md:gap-6 */}
+            <div className="flex flex-wrap items-center gap-3 md:gap-6 text-gray-500 text-sm md:text-base">
+              
               {/* 分类标签 */}
-              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs md:text-sm font-semibold flex items-center gap-1 shrink-0">
                 <Tag className="w-3 h-3" />
                 {frontmatter.category || "未分类"}
               </span>
-              {/* 日期*/}
-              <div className="flex items-center gap-2">
+              
+              {/* 日期 */}
+              <div className="flex items-center gap-1.5 shrink-0">
                 <CalendarDays className="w-4 h-4" />
                 <time>{frontmatter.date}</time>
               </div>
+              
               {/* 阅读时间 */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <Clock className="w-4 h-4" />
                 <span>{frontmatter.reading} 分钟阅读</span>
               </div>
+              
               {/* 字数 */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <PenTool className="w-4 h-4" />
                 <span>{frontmatter.words} 字</span>
               </div>
+
             </div>
           </div>
 
