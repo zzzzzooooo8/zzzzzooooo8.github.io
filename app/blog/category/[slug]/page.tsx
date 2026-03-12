@@ -34,21 +34,15 @@ export default async function Home({
   const { slug } = await params;
   const posts = getAllPosts();
   const aimCategory = findNameBySlug(slug, categoryTree);
-  console.log(aimCategory);
-  const aimPosts = posts.filter(
-    (post) => aimCategory && post.frontmatter.category.includes(aimCategory)
-  );
+  const aimPosts = aimCategory
+    ? posts.filter((post) => post.frontmatter.category.includes(aimCategory))
+    : [];
   const postMap = countCategory();
   const postMap1 = countTag();
   let postNum = 0;
-  let CaNum = 0;
-  let tagNum = 0;
+  const tagNum = postMap1.size;
   for (const n of postMap.values()) {
     postNum += n;
-    CaNum += 1;
-  }
-  for (const n of postMap1.values()) {
-    tagNum += 1;
   }
 
   return (
@@ -65,7 +59,7 @@ export default async function Home({
       </div>
 
       {/*内容 */}
-      <div className="flex mt-20">
+      <div className="mt-20 flex w-full">
         <div className=" bg-transparent min-h-screen flex-col gap-15 ml-6 hidden md:flex">
           <div className="bg-white/80 w-60 h-75 rounded-md flex flex-col items-center">
             <div className="mt-8 w-22 h-22 rounded-full shadow-xl overflow-hidden bg-gray-200">
@@ -125,51 +119,51 @@ export default async function Home({
           </div>
         </div>
         {/*文章 */}
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-1 flex-col">
           {aimPosts.map((aimPost) => {
             return (
               <div
                 key={aimPost.slug}
-                className="bg-white/90 mx-10 rounded-lg mb-5 p-5 flex flex-col gap-3"
+                className="mx-4 mb-5 flex flex-col gap-3 rounded-lg bg-white/90 p-4 shadow-sm sm:mx-6 sm:p-5 md:mx-10"
               >
                 <div>
                   <Link
                     href={`/blog/${aimPost.slug}`}
-                    className="text-3xl font-black text-[#468C37] hover:scale-102"
+                    className="inline-block origin-left text-2xl font-black text-[#468C37] transition-transform hover:scale-[1.02] sm:text-3xl"
                   >
                     {aimPost.frontmatter.title}
                   </Link>
-                  <div className="flex gap-5 my-1">
-                    <div className="flex items-center gap-1">
-                      <CalendarDays className="w-5 h-5" />
+                  <div className="my-2 flex flex-wrap gap-3 text-sm sm:gap-5 sm:text-base">
+                    <div className="flex items-center gap-1 text-gray-600">
+                      <CalendarDays className="h-4 w-4 sm:h-5 sm:w-5" />
                       <p className="w-fit font-semibold">
                         {aimPost.frontmatter.date}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <LibraryBig className="w-5 h-5" />
-                      <p className="font-semibold">
+                    <div className="min-w-0 flex items-center gap-1 text-gray-600">
+                      <LibraryBig className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                      <p className="min-w-0 break-words font-semibold">
                         {aimPost.frontmatter.category}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Tag className="w-5 h-5" />
-                      <p className="font-semibold">
+                    <div className="min-w-0 flex items-center gap-1 text-gray-600">
+                      <Tag className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                      <p className="min-w-0 break-words font-semibold">
                         {aimPost.frontmatter.tags}
                       </p>
                     </div>
                   </div>
                 </div>
-                <p className="line-clamp-2">
+                <p className="line-clamp-2 text-sm leading-relaxed text-gray-700 sm:text-base">
                   {aimPost.frontmatter.description}
                 </p>
-                <div className="flex gap-3 text-gray-500 text-sm">
-                  <div className="flex ">
-                    <PenTool className="w-4 h-4" />
+                <div className="mt-1 flex gap-4 text-xs text-gray-400 sm:text-sm">
+                  <div className="flex items-center gap-1.5">
+                    <PenTool className="h-3.5 w-3.5" />
                     <p>{aimPost.frontmatter.words}字</p>
                   </div>
-                  <div className="flex">
-                    <AlarmClockCheck className="w-4 h-4" />
+                  <div className="flex items-center gap-1.5">
+                    <AlarmClockCheck className="h-3.5 w-3.5" />
                     <p>{aimPost.frontmatter.reading}分钟</p>
                   </div>
                 </div>

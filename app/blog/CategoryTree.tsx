@@ -9,10 +9,12 @@ const CategoryItem = ({
   category,
   level,
   categoryCount,
+  onNavigate,
 }: {
   category: CategoryNode;
   level: number;
   categoryCount: Map<string, number>;
+  onNavigate?: () => void;
 }) => {
   // 核心：每个 Item 独立管理自己的展开状态
   const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +54,7 @@ const CategoryItem = ({
           {/* 2. 目录链接名称 */}
           <Link
             href={`/blog/category/${category.slug}`}
+            onClick={onNavigate}
             className="text-gray-700 text-l scale-110 hover:text-[#468C37] hover:font-bold transition-colors block flex-1"
           >
             {category.name}
@@ -66,6 +69,7 @@ const CategoryItem = ({
           categories={category.children!}
           level={level + 1}
           categoryCount={categoryCount}
+          onNavigate={onNavigate}
         />
       )}
     </li>
@@ -77,10 +81,12 @@ export default function CategoryTree({
   categories,
   level = 0,
   categoryCount,
+  onNavigate,
 }: {
   categories: CategoryNode[];
   level?: number;
   categoryCount: Map<string, number>;
+  onNavigate?: () => void;
 }) {
   if (!categories) return null;
   return (
@@ -96,6 +102,7 @@ export default function CategoryTree({
             category={ca}
             level={level}
             categoryCount={categoryCount}
+            onNavigate={onNavigate}
           />
         </div>
       ))}

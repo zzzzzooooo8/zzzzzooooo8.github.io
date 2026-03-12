@@ -51,10 +51,16 @@ export const categoryTree: CategoryNode[] = [
   },
 ];
 
-export function findNameBySlug(slug: string, categories: CategoryNode[]) {
+export function findNameBySlug(
+    slug: string,
+    categories: CategoryNode[]
+): string | undefined {
     for (const ca of categories) {
         if (ca.slug === slug) return ca.name;
-        if (ca.children.length) return findNameBySlug(slug, ca.children);
+        if (ca.children.length) {
+            const childResult = findNameBySlug(slug, ca.children);
+            if (childResult) return childResult;
+        }
     }
 }
 

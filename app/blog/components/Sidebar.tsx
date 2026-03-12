@@ -7,8 +7,10 @@ import { categoryTree } from "@/app/blog/categoryData";
 
 const SidebarContent = ({
   categoryCount,
+  onNavigate,
 }: {
   categoryCount: Map<string, number>;
+  onNavigate?: () => void;
 }) => {
   return (
     <div className="flex flex-col gap-6 mt-8">
@@ -25,6 +27,7 @@ const SidebarContent = ({
           <CategoryTree
             categories={categoryTree}
             categoryCount={categoryCount}
+            onNavigate={onNavigate}
           />
         </div>
       </div>
@@ -61,7 +64,10 @@ export default function Sidebar({
               3. 动画改为 slide-in-from-left，让它从左边顺滑贴出
           */}
           <div className="absolute top-0 left-0 h-full w-[280px] bg-white shadow-2xl p-4 flex flex-col animate-in slide-in-from-left duration-300 overflow-y-auto">
-            <SidebarContent categoryCount={categoryCount} />
+            <SidebarContent
+              categoryCount={categoryCount}
+              onNavigate={() => setIsOpen(false)}
+            />
           </div>
         </div>
       )}
