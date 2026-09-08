@@ -85,7 +85,9 @@ export function getAllPosts(): Post[] {
       content,
     };
   });
-  return posts;
+  return posts.sort((a, b) =>
+    b.frontmatter.date.localeCompare(a.frontmatter.date)
+  );
 }
 
 export function countCategory() {

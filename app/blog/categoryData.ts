@@ -23,6 +23,7 @@ export const categoryTree: CategoryNode[] = [
     children: [
       { name: "Node.js", slug: "nodejs", children: [] },
       { name: "数据库", slug: "database", children: [] },
+      { name: "工程设计", slug: "engineering-design", children: [] },
       {
         name: "FastAPI",
         slug: "fastapi",
