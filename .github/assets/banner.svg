@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="title desc">
+  <title id="title">Zoolin Blog</title>
+  <desc id="desc">在代码与日常之间，记录成长。森林绿色封面，配有书本、枝叶和轨道插画。</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#B9DCC3" stroke-opacity=".07"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="440" rx="24" fill="#153B30"/>
+  <rect width="1280" height="440" rx="24" fill="url(#grid)"/>
+  <path d="M0 403C270 330 431 492 690 398s359-63 590-130v172H0Z" fill="#1D493A"/>
+  <circle cx="1032" cy="210" r="159" fill="none" stroke="#B9DCC3" stroke-opacity=".2"/>
+  <circle cx="1032" cy="210" r="125" fill="none" stroke="#B9DCC3" stroke-opacity=".12"/>
+  <circle cx="1032" cy="51" r="6" fill="#A1F7BF"/>
+  <circle cx="873" cy="210" r="4" fill="#D7C789"/>
+  <g font-family="Consolas, monospace" font-size="14" letter-spacing="3" fill="#B6D7C3">
+    <text x="72" y="69">A PERSONAL CORNER OF THE WEB</text>
+    <text x="72" y="379">CODE / NOTES / EVERYDAY LIFE</text>
+  </g>
+  <text x="67" y="204" font-family="Georgia, 'Times New Roman', serif" font-size="104" fill="#F5F3E7">Zoolin<tspan fill="#A1F7BF">.</tspan></text>
+  <text x="74" y="269" font-family="'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="25" letter-spacing="4" fill="#D2E6D7">在代码与日常之间，记录成长。</text>
+  <path d="M73 310H134" stroke="#A1F7BF" stroke-width="3"/>
+  <g transform="translate(918 156)">
+    <path d="M0 25Q54 6 112 35Q166 6 220 25V149Q162 131 112 159Q56 131 0 149Z" fill="#E8EADB"/>
+    <path d="M112 35V159" stroke="#153B30" stroke-width="3"/>
+    <path d="M20 54Q57 44 91 60M20 76Q57 66 91 82M20 98Q57 88 76 100M135 107Q169 95 201 104M135 129Q169 117 201 126" fill="none" stroke="#95AB92" stroke-width="3" stroke-linecap="round"/>
+    <path d="M164 82C155 45 164 9 186-30" fill="none" stroke="#548B63" stroke-width="4"/>
+    <path d="M166 49Q125 38 142 8Q169 13 166 49M169 23Q198 31 205 0Q178-10 169 23M180-14Q152-23 167-50Q192-45 180-14" fill="#7EBC88"/>
+  </g>
+  <path d="M1169 83v20m-10-10h20M887 328v14m-7-7h14" stroke="#D7C789" stroke-width="2" stroke-linecap="round"/>
+  <text x="1117" y="379" font-family="Georgia, serif" font-style="italic" font-size="20" fill="#B6D7C3">est. 2026</text>
+</svg>
